@@ -28,7 +28,6 @@ X.vars <- c(	"var5",
 X.vars.f <- paste(X.vars,collapse="+")
 fit.y <- lm(as.formula(paste("Fvar5~regime+", X.vars.f, sep="")), data=jensen.cc)
 fit.d <- lm(as.formula(paste("regime~", X.vars.f, sep="")), data=jensen.cc)
-
 summary(fit.y)
 summary(fit.d)
 
@@ -78,5 +77,11 @@ dev.off()
 #### WHat is the minimum number of individual observations
 ####you have to delete in order to eliminate the significant result?
 
+###generate a new covariate that is 
+### uniform random in the range of the treatment variable 
 
+###randomly replace half of the values of this covariate with the true value 
+### of the treatment variable
+
+##re-run the analysis...how does the figure look?
 
