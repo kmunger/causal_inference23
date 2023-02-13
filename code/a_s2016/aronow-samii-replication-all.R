@@ -66,6 +66,7 @@ plot(	world,
 		border="gray", lwd=.25)
 dev.off()
 
+w1
 
 ########
 
@@ -74,9 +75,23 @@ dev.off()
 
 #### What are the top 10 individual observations in terms of weight?
 
+
+jensen.cc$w<-w
+
+library(dplyr)
+?order
+
+x<-jensen.cc[order(jensen.cc$w, decreasing = T),]
+
+
 #### WHat is the minimum number of individual observations
 ####you have to delete in order to eliminate the significant result?
+i<-15
+xx<-x[i:length(x$country),]
 
+fit.y <- lm(as.formula(paste("Fvar5~regime+", X.vars.f, sep="")), data=xx)
+
+summary(fit.y)
 ###generate a new covariate that is 
 ### uniform random in the range of the treatment variable 
 
@@ -84,4 +99,16 @@ dev.off()
 ### of the treatment variable
 
 ##re-run the analysis...how does the figure look?
+
+jensen.cc$new<-runif(1630, 0,20)
+?sample
+jensen.cc$indicator<-sample.int(2,1630, replace = T)
+
+
+jensen.cc$new[jensen.cc$indicator==2]<-jensen.cc$regime[jensen.cc$indicator==2]
+
+fit.y <- lm(as.formula(paste("Fvar5~regime+new+", X.vars.f, sep="")), data=jensen.cc)
+summary(fit.y)
+
+
 
