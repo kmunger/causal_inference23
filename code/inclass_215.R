@@ -26,7 +26,7 @@ feols(
   data = df_exp, vcov = "hc1"
 ) |>
   etable()
-
+?feols
 
 
 # Estimate treatment effect
