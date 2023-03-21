@@ -1,0 +1,27 @@
+
+Call:
+lm(formula = fact_immigrants_w3_correct_dk0 ~ log_tweets_immigration + 
+    fact_immigrants_w2_correct_dk0 + woman + age + lowerclass + 
+    profile_education_age + white_british + married + newsnight_freq + 
+    religious + internet_freq_inc + newspaper_type, data = df)
+
+Coefficients:
+                   (Intercept)          log_tweets_immigration  
+                      0.179731                        0.014431  
+fact_immigrants_w2_correct_dk0                           woman  
+                      0.266249                       -0.078176  
+                           age                      lowerclass  
+                      0.001700                       -0.005943  
+         profile_education_age                   white_british  
+                      0.011060                       -0.019597  
+                       married                  newsnight_freq  
+                      0.031793                       -0.007574  
+                     religious               internet_freq_inc  
+                     -0.042624                        0.023397  
+        newspaper_typeBlue Top           newspaper_typeRed Top  
+                     -0.017622                       -0.111527  
+           newspaper_typeOther              newspaper_typeNone  
+                      0.006746                       -0.043230  
+
+[1] 0.4905348
+[1] 0.008
