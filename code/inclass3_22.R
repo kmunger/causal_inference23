@@ -43,7 +43,6 @@ binscatter$bins_plot +
 
 ###Estimate the returns to schooling using an indicator for individuals being born in the first quarter of the year as an instrument for completed years of schooling (and no other controls).
 
-# ---- Simple (Wald) IV Estimator ----------------------------------------------
 
 # Formula y ~ exogenous | fixed effects | endogenous ~ instrument
 # 1 = constant, 0 = no fixed effects
@@ -53,10 +52,10 @@ feols(
   vcov = "hc1"
 )
 
-#Estimate the average log wages and completed years of schooling for individuals who are and are not born in the first quarter. Check that you can get the 2SLS estimate in 2 manually from these numbers, using the Wald IV formula:
+#Estimate the average log wages and completed years of schooling for individuals who are and are not born in the first quarter. 
+#Check that you can get the 2SLS estimate in 2 manually from these numbers, 
+#using the Wald IV formula:
   
-
-
 data[,
      .(n = .N, mean = mean(lwage), sd = sd(lwage), min = min(lwage), max = max(lwage)),
      by = qob_1
@@ -66,8 +65,10 @@ data[,
      by = qob_1
 ]
 
+(5.157450 - 5.148471) / (11.52515 - 11.39960 )
 
-# ---- Overidentified IV Estimator ---------------------------------------------
+  
+
 
 
 #Collapse your data into means of log wages and completed years of
