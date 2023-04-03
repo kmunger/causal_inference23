@@ -33,9 +33,29 @@ feols(
 
 # ---- Difference-in-Differences - Averages
 
+with(df_exp, {
+  y00 = mean(re[year == 75 & ever_treated == 0])
+  y01 = mean(re[year == 78 & ever_treated == 0])
+  y10 = mean(re[year == 75 & ever_treated == 1])
+  y11 = mean(re[year == 78 & ever_treated == 1])
+  did = (y11 - y10) - (y01 - y00)
+  did
+})
 
 
 # ---- Difference-in-Differences - OLS
+feols(
+  re ~ i(treat) |  id + year, 
+  data = df_exp |> filter(year %in% c(75, 78)), 
+  vcov = "hc1"
+)
+
+
+?feols
+  
+# ---- Difference-in-Differences - OLS
+
+
 
 
 
@@ -81,7 +101,7 @@ with(df_nonexp, {
 # ---- Difference-in-means - OLS
 feols(
   re ~ i(treat),
-  data = df_exp |> filter(year == 78), vcov = "hc1"
+  data = df_nonexp |> filter(year == 78), vcov = "hc1"
 )
 
 
