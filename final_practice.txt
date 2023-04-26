@@ -1,0 +1,14 @@
+
+
+Penn State is worried about undergraduate cheating; the number of reported academic integrity violations is on the rise. 
+
+They decide to implement a high-profile visiting speaker series about why cheating is bad. They are especially concerned about certain departments, so they decide to implement an additional policy: in the half of departments which are above the median in number of academic integrity violations, they hang fliers reminding people of the upcoming speakers on every billboard and office door. The outcome measure of interest is the number of academic integrity violations reported by each department.
+
+First, let's think about the speaker series as the *treatment*. What is the desired estimand? What estimators could we use to target this estimand? Are there any biases we should be worried about? 
+
+
+Now, let's think about the fliers as the *treatment*. What is the desired estimand? What estimators could we use to target this estimand? Are there any biases we should be worried about? 
+
+
+
+Finally, are there any issues about unmodelled strategic response? 
