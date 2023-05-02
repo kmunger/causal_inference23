@@ -7,6 +7,8 @@ They decide to implement a high-profile visiting speaker series about why cheati
 First, let's think about the speaker series as the *treatment*. What is the desired estimand? What estimators could we use to target this estimand? Are there any biases we should be worried about? 
 
 
+
+
 Now, let's think about the fliers as the *treatment*. What is the desired estimand? What estimators could we use to target this estimand? Are there any biases we should be worried about? 
 
 
