@@ -1,0 +1,335 @@
+
+
+Final Exam Answers
+
+Notes: People did well! I'm pleased! A few spots where people consistently had trouble.
+
+T/F1: you can't use a loss function through cross-validation; in order to understand the output of the cross-validation, you need to have already defined the loss function! Now, it possible that you have binary data you want to classify; even then, you need to decide if you want to maximize accuracy, recall, F1 score etc. But at that point, you can use cross-validation to select the functional form of the loss function/optimize the parameters. 
+
+T/F2: the instrument has to cause treatment. A few ppl said that "we can't prove it statistically, therefore correlation is what is important" -- if this were true, we wouldn't need to use IVs at all!
+
+T/F4: RDD violates mutual support. There is an explicit disjunction in the treatment assignment for values of the running variable around the discontinuity. Instead, we discuss "exchangability"
+
+T/F5: I can't believe how cynical you all are! 
+
+SA1: Again, there's some consideration of the bias/variance tradeoff and some *substantive* evaluation of when the motivating assumptions for RDD are plausible. It can't all be data-driven, but within the set of bandwidths for which we believe the assumptions, there are algorithms to fine-tune the choice. (I think a lot of the confusion here is that Zonszein didn't explicitly say this in the paper)
+
+SA2: A study being an RCT is neither necessary nor sufficient for using ITT, though it is related. It has more to do with what we're going to use the knowledge *for*. Cost-benefit analysis of implementing a similar policy: probably want ITT. Theory-testing: probably want ATT (subject to statistical problems of attrition etc)
+
+SA3: This question wasn't really about IV, that was just an example -- it's to do with the definition of the potential outcomes. See the example below
+
+SA6: This was sort of a trick question: if your colleague says they have a graph of the potential outcomes, you should either fall to your knees in recognition of the second coming of Christ or tell your colleague to brush up on their causal inference. We can't observe the POs! So they have a graph of something, which is likely useful for building a case for the assumption, but it can't be determined from any data we can access in this fallen world. 
+
+SA7: Some of you confused this slightly w positivity, and they are superficially similar, but manipulability is more conceptual: is it meaningful to imagine changing someone's *race* and leaving everything else constant?
+
+
+People generally did the LITERATURE section well. I was hoping for a little more creativity on Q4, of an *example* of data which might convince us that these assumptions were implausible...but the reason this required so much creativity is that the assumptions seem pretty solid. Someone mentioned the possibility that a Mexican-American pop star who got famous at just the right time to cause a change in naming patterns right around the RD date --- this would violate the local randomization.
+
+
+
+T/F
+
+1. The choice of a loss function in the context of supervised machine learning should be
+made through cross-validation: False
+
+This choice is based on theoretical criteria about what you care about most; CV is only usable after a loss function has been defined.
+
+2. It doesn’t matter whether an instrument variable causes the treatment, only whether it
+predicts it in the data: False
+
+Even if the instrument strongly predicts the treatment, the instrument
+should cause changes in the treatment, or else we can’t trace a complete causal path from
+the instrument to the outcome through the endogenous variable
+
+3. The goal of minimizing a loss function in the context of supervised machine learning is
+best achieved by evaluating the bias-variance tradeoff: True
+
+
+4. The regression discontinuity design violates the mutual support condition: True
+
+Since the discontinuity divides treatment values, treatment groups do not overlap. We rely on extrapolation to estimate the local average treatment effect (LATE). This is why we restrict the estimation to a bandwidth around the discontinuity point, this helps make exchangability a reasonable assumption.
+
+
+5. Our store of social scientific knowledge is steadily accumulating as we continue to publish
+academic papers. Not today, and perhaps not tomorrow, but we will eventually complete
+social science and usher in an era of perfect and permanent harmony. FALSE
+
+
+Oops...
+
+Short answer:
+
+
+1. How should we decide what the appropriate bandwidth for a regression discontinuity
+design is? 
+
+The choice of bandwidth in a RDD depends firstly on the research question and data at hand. Depending
+on the specific study, the window in which you’re looking at units related to discontinuity may change.
+For example, a close-election RDD may have a smaller bandwidth than a RDD with a difference choice
+of cutoffs (i.e., test scores, propensity scores, etc.). Secondly, choosing a bandwidth comes with a
+decision based on the bias-variance tradeoff associated with the research question. Should a researcher
+hand-pick an optimal bandwidth based on theoretical guidelines from previous research, or utilize
+data-driven methods to minimize a certain aspect of the model such as the mean-squred error (MSE)?
+If hand-choosing bandwidths based on theoretical guidance, conducting sensitivity analyses allow for
+estimating the treatment effect for different bandwidths and assessing the consistency of the result across the different bandwidths. On the other hand, utilizing statistical methods implemented with
+various R packages (i.e., cross-validation, least squares cross-validation, or local linear nonparametric
+regression) can assist with minimizing the MSE and optimizing the bandwidth given the data used in
+the study.
+
+
+
+
+
+
+
+2. When is the ITT the estimand of interest? Provide an example
+
+
+The ITT is the estimand of interest when we are interested in the overall effectiveness of the treatment,
+rather than the effectiveness of the treatment when people actually adhere to it. For example, to study the
+effectiveness of a new treatment for a disease (i.e., Alzheimer’s disease), some patients will get the actual
+treatment, while other will get the placebo one. Among the patients who get the actual treatment, only a
+certain percentage of them completely follow the treatment. Others may only follow it at first but drop it
+when the newness dies down, or they may periodically take it since they forget. When the researchers measure
+the outcome, they will also include the results of those who fail to adhere to the treatment completely, rather
+than just the people who stick to the treatment 100% of the times
+
+
+3. Under what conditions is the “no defiers” assumption about principal
+strata (used to justify certain IV estimators) plausible / implausible?
+Provide an example.
+
+The “no defiers” assumption could be implausible when treatment uptake is up
+to the individual—for example, people might be so distrustful of medical professionals that
+they mask when they are told not to and don’t mask when they are told to. On the other
+hand, in drug RCTs, you take a placebo or the treatment under medical supervision—it’s
+much harder to defy either treatment assignment, so it is unlikely that there would be people
+who would always take the unassigned treatment/placebo. NOTE: This wasn't really about IV...
+
+
+
+4. Under what circumstances are we interested only in prediction and not
+causality?
+
+
+When we ask different questions or have different purposes, sometimes prediction is what we are interested
+in. Namely, when we are interested in predicting outcomes but not individual influence/mechanism. For
+instance, when we ask questions like how likely will outcome D happen given a host of characteristics
+or features. In applied political science setting, prediction is used under circumstances like measurement
+strategy for downstream tasks. For instance, we want to use machine learning to classify texts into binary
+categories. In this case, the classification task is a prediction.
+
+
+
+5. In the context of causal mediation, when are we interested in the Controlled Direct Effect versus the Natural Direct Effect? Provide an example
+
+
+The controlled direct effect identifies the difference in outcome by treatment
+at a constant level of the mediator, while the natural direct effect identifies the difference
+in outcome by treatment when holding the mediator to its potential value when assigned
+a specific treatment level. The CDE and NDE are different if the treatment and mediator
+interact. Imagine an experiment where the treatment group is assigned to take a drug that
+also has a side effect (and the control doesn’t get assigned the drug). The treatment group
+might then take a second drug to reduce the side effect. Thus, being assigned the treatment
+changes the level of the mediator (taking the second drug), even if the second drug (e.g.
+Tylenol) is also taken by some in the control group for other reasons. If our outcome is
+happiness or satisfaction with health, then the controlled direct effect of the first drug, given
+some level of taking the second drug, is different than the natural direct effect of the first
+drug, held at the potential level of the second drug
+
+
+
+
+
+6. A colleague shows you a graph of the potential outcomes of their dataset
+in order to justify their parallel trends assumption to motivate a differencein-difference design. Is this sufficient evidence to accept this assumption?
+
+No, it is not sufficient evidence on its own to accept the assumption. This is because the parallel trends
+assumption cannot be directly tested, given the fundamental problem in causal inference – we never
+observe the counterfactual outcomes. Testing for a common pre-treatment trend plays an important
+role in validating the parallel trends assumption underlying DID. Yet, it can only build confidence
+about the DID design, not sufficient evidence to accept the parallel trends assumption.
+
+
+
+
+7. What is the “manipulability” conception of causality, and how does it
+relate to the Neyman-Rubin “potential outcomes” framework?
+
+Causality is only defined if it conceptually possible to manipulate the "treatment" status; eg that the causal effect of "race" is not well-defined. 
+
+
+
+8. When is clustering sufficient to handle the problem of spillovers? When
+is it not?
+
+
+I think generally, clustering is not sufficient to handle the problem of spillovers. If spillover is present, then
+SUTVA is violated, which makes treatment effects correlated between units. There are several ways to handle
+spillovers, but clustering is not one of them. Clustering is used to handle clustered data structure, but it
+does not make an assumption about SUTVA. There is one approach that’s similar to clustering – exposure
+mapping. In this approach, researchers specify the interference network using substantive knowledge, which
+may also contain clustered structure.
+Therefore, to directly answer the question, clustering is sufficient when the spillover structure is simple,
+known clusters (such as nuclear family). It is not sufficient when we do not know the spillover structure, or
+spillover structure is complex (such as spatially localized).
+
+
+
+9. What is the exclusion restriction? Provide an example in a hypothetical
+instrumental variables design.
+
+
+The exclusion restriction is that the instrument should only affect the outcome
+through the endogenous variable, not directly. Say we want to estimate the effect of attending private school on college degree attainment. Since people who are educated or wealthy
+probably disproportionately self-select into private schools, we could use school vouchers as
+an instrument: the IV is being selected for a school voucher in a lottery, the endogenous
+variable is enrolling in private school, and the outcome is years of education. Being randomly
+selected for a school voucher probably does not affect education among people who did not
+enroll in the school (maybe someone feels really special because they won and become really successful in their public school? seems unlikely), so the design satisfies the exclusion
+restriction since the effect of the IV on the outcome would only pass through private school enrollment.
+
+
+
+10. In the context of external validity, what is the “unconfounded location”
+assumption? Provide an example in which this assumption is plausible
+
+
+Unconfounded location assumes that conditional on pre-treatment covariates, potential outcomes are
+independent from location. As an example, let’s assume that we identify a positive effect of GDP
+growth on the incumbent party’s vote share for a set of countries. It is possible that this effect would
+differ based on a country’s pre-treatment level of GDP. Unconfounded location holds for countries
+where the same effect can be identified when conditioned on the pre-treatment level of GDP.
+
+
+LITERATURE
+
+
+1. What are the outcomes of interest? How are they measured?
+
+
+The cultural distinctiveness of mother’s children’s names (by their “Mexicanness”—
+measured by frequency of children with that name born to Mexican-born mothers in the U.S.,
+relative to Mexican- and American-born mothers in the U.S.) is the primary outcome of interest. The other outcomes of interest for the participation analyses are English language
+ability; participation in laborr market; participation in military service; annual salary; and
+health insurance coverage.
+
+
+2. What is the “discontinuity” in the central RDD design?
+
+
+The discontinuity is an arbitrary policy cutoff point where eligibility for the 2012 Deferred Action for Childhood Arrivals program (DACA), which provides protection from deportation and temporary work authorization to unauthorized immigrants to the U.S., is set to being born on or after June 15, 1981. Therefore,
+immigrants who were born just before the eligibility cut-off point (June 15, 1981) are compared with immigrants who were born just after the eligibility cut-off point.
+
+3. What causal identification assumptions are we required to make in order
+to accept this research design?
+
+Regression discontinuity requires smoothness and continuity across the discontinuity of the density of units.
+It also requires that nothing else (covariate-wise) changes around the discontinuity. Some argument of the
+exchangability of units on either side of the discontinuity (restricted to some bandwidth) is also needed.
+Regression discontinuity also restricts effects to local areas around the bandwidth. This helps in the exchangability assumption and reduces the risk of extrapolation.
+
+
+
+
+4. Are these assumptions plausible? (Yes: this paper got her a job at
+Berkeley.) What substantive evidence might convince us that these assumptions are not plausible?
+
+
+The smoothness and continuity of the density of unit across the discontinuity seems plausible. It has been
+shown that there are trends in birth rates across months, but day to day birth rates are likely smooth. There
+may be small exceptions for holidays like Christmas and New Years with pregnant individuals attempting to
+induce early labor (medically or with self-informed technique) to avoid having children on major holidays.
+However, this is likely small if even noticeable at all. This also assumes the rate Mexican immigrants
+come into the country is fairly smooth and continuous, which seems plausible. These assumptions are also
+supported by investigations by Zonszein discussed in detail in the next question. If we saw jumps in the
+densities of mothers’ birthdays or rejected a RD manipulation test, we would have evidence against this
+assumption.
+3We should also be cautious of potential coincidental cultural changes around 2012, such as releases of pop
+culture entertainment materials, such as movie or music, which popularize, normalize, or stigmatize Mexican
+names. A brief Google search does not bring any major concerns. Looking arbitrary cutoff dates for effect
+could also address this concern, especially if we focus on similar pop cultural events. Changing bandwidth
+sizes, could also potentially exclude impactful events (which are unlikely to occur direction on the threshold
+date). If the effect on the MNI is about the same, then we don’t have evidence of this concern.
+Other covariates should be investigated for smoothness across the discontinuity, particularly financial and
+demographic information about mothers, such as age when giving birth, household income, etc. It seems
+plausible that these would not change across the discontinuity, but this should still be investigated like
+Zonszein did. Significant jumps in covariates could indicate the assumption that nothing else changed across
+the discontinuity is not valid.
+The exchangability of mothers on either side of the discontinuity relies on the assumption that individuals
+were not able to manipulate their birth dates to be DACA eligible. This is not an immediately plausible
+assumption, but it is addressed in the Appendix E (see next question). Evidence of this being violated
+could be comparing density of birth dates of Mexican mothers across the discontinuity with non-immigrant
+mothers. If the densities differ greatly, there may be cause for concern. Additionally, any significant jumps
+in a fitted density of Mexican mothers’ birth dates would be evidence against the regression discontinuity
+(RD) assumptions.
+Another concern about this analysis is due to its restriction to immigrants and births in Florida, we could
+have a confounded location which means the results cannot be generalized to all immigrant mothers. Florida’s
+larger Hispanic population could influence the naming practices of immigrants with an increased community
+of cultural maintenance. Additionally, Florida’s politics could also influence social stigmas and the nonimmigrant population’s reaction to DACA to further stigmatize immigrants. These could influence the
+social “cost” of more identifiable Mexican names
+
+5. Look at the analyses presented in Appendices D and E. What do they
+tell us about the plausibility of the research design?
+
+
+Appendix D tells us that the density of mothers is continuous around the cutoff; if it wasn’t, we would be concerned that there are barely-ineligible mothers that may
+not be observed (perhaps because they did not have legal status, for example). Appendix E
+shows that mothers’ covariates that could affect naming are continuous around the cutoff and
+that placebo tests which arbitrarily move the cutoff date around fail to identify an effect (as
+should be the case, else the observed effect for the DACA eligibility date simply be spurious
+or suggest other confounders affect cultural distinctiveness). Moreover, the identified effect
+is not sensitive to various other data-driven bandwidth choices, so the effect is not simply
+an artifact of methodological decisions.
+
+
+
+6. Figure 2 presents the main results of the paper. What is the bandwidth
+used in this analysis? How is this justified?
+
+
+ For the cultural distinctiveness analysis, the MSE-optimal bandwidth around
+the cutoff (estimated with a triangular kernel) is 1,332 days above/below. This is justified
+by using a data-driven process to choose an optimal, symmetric bandwidth, rather than
+choosing an ad hoc bandwidth, that balances bias and variance best.
+
+
+
+
+
+
+
+Simulation
+
+
+
+The first few are straightforward. In expectation:
+
+1. ATE is 1, ITT is 0 (Remember -- we have random assignment! So the ATE is always identified! Except below when we condition on covariates!)
+
+2. ATE is 1, ITT is 0 (the key is tha	t the number of defiers equals the number of compliers)
+
+3. ATE is a little less than 1 (there are more always-takers than never-takers in the X > 0 group) and the ITT is a decent amount .15-.30 more than 0 (there are a lot more compliers than defiers overalll; this effect would be larger if the compliers > defiers were true for the X > 0 rather than the X < 0).
+
+
+case 2 (simple non-response):
+
+1. ATE is 1 (again! Random assignment!) ITT is a bit more than 0 (more compliers than defiers in the final dataset)
+
+2. ATE is 1 (again! Random assignment!) ITT is a bit more than 0 but lower than before because there are fewer compliers overall
+
+3. ATE is a little less than 1 (by the logic in 1.3) and the ITT is a significant amount above 0, combining the logic in 1.3 and 2.1.
+
+
+case 3 (conditional non-response):
+
+1. ITT is 0 by the same logic as in 1.1; ATE is a little less than 1 (there is more non-response among treated units because their realized value is more likely to be above .5)
+
+2. ITT is 0 by the same logic as in 1.2; ATE is a little less than 1 (there is more non-response among treated units because their realized value is more likely to be above .5)
+
+3. ATE is a little bit less than 1 but this difference is greater than the difference in 3.2 or 1.3 becuase the effects are compounded; ITT is a significant amount above 0, by the same logic as in 1.3 
+
+
+
+
+
